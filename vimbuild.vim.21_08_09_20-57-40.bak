@@ -1,0 +1,140 @@
+"install youcompletme" <-- " vim82 " <--" libncurses5-dev " in session './configure'
+																		 <--" python3.6.0+ " in session ' make && make install "<--"pip""pip3"
+                       <-- " cmake3 or cmake " <-- " openssl " (libssl-dev) in session './bootstrap'
+																							 <-- " g++ " in session 'make'  
+"install nerdtree"
+"install pyserial"
+"install pybluez"
+"keyboard switch capslock to escape"
+"install sdcc"
+"install bluetooth 5.0" <-- " build "
+"add me to root group can use sudo
+"install minicom"
+"sudo cat /dev/rfcommm0
+"samba to window7"
+
+"===  install vim82:
+step 1: download from authority web
+    liujinjing@Liuban:~$ wget http://ftp.vim.org/ftp/ftp/vim/unix/vim-8.2.tar.bz2
+    liujinjing@Liuban:~$ sudo tar xvf vim-8.2.tar.bz2
+
+step 2; "./configure" but error occur. need terminal ncurses,
+    liujinjing@Liuban:~/vim82/src$ apt-cache search ncurses
+    liujinjing@Liuban:~/vim82/src$ sudo apt-get install libncurses5-dev
+
+step 3: "make && make install" error occur again. this time need python 3.6.0+ support
+    liujinjing@Liuban:~/vim82/src$ sudo ./configure --enable-pythoninterp=yes --enable-cscope --enable-fontset --with-python3-config-dir=/usr/lib/python3.7/config-3.7m-i386-linux-gnu/ --enable-python3interp=yes --with-python3-command=python3.7
+    liujinjing@Liuban:~/vim82/src$ sudo make
+    liujinjing@Liuban:~/vim82/src$ sudo make install
+
+Done!
+
+"===  keyboard switch capslock to escape
+  'sudo vim /etc/default/keyboard'
+  'XKBOPTIONS=caps:escape"
+  'sudo dpkg-reconfigure keyboard-configuration'
+  warning:syntax must be obey strictly.another seg:"XKBOPTIONS=ctrl:nocaps" is also ok.means replace capslock by ctrl.
+  'https://wiki.archlinux.org/title/X_keyboard_extension#Using_keymap' is also valueable reference.
+  'man 5 keyboard' is help manual.
+"===  install sdcc
+
+"===  install cmake
+  need 'openssl',then need python3.6.0+.
+"===  install openssl
+  need '
+"===  install nerdtree
+
+"===  install youcompleteme
+  first all need g++(!!!),  need 'cmake'. 
+
+"===  compare dir
+  vimdiff <(cd /media/liujinjing/9696-1DE7/mydebian/download;find .| sort) <(cd /home/liujinjing/download;find .| sort)
+
+"===  bakup mywork
+backup to media/liujinjing/9696-1DE7
+some dir need to backup"download" ".vim" "stc" "myinstall"
+some files need to backup, such as "vim82inst.vim"
+
+"===  add to root group and use sudo
+#visudo
+liujinjing ALL=(ALL:ALL) ALL
+' add last seg in the end.'
+Done
+
+"=== install bluetooth 5.0 RTL8761 bh519a
+' sudo make install INTERFACE=all ' error occur '/lib/modules/4.19.0-686-pae/build' no that file or directory.
+
+"=== install build
+  step 1:update files index. 
+  step 2:"sudo apt-get install linux-headers-$(uname -r)"
+  then install bh519a driver.
+  Done
+
+"=== bluez command
+  ' hciconfig' 'hcitool' very useful.
+  ' hcitool dev'      "echo local device info
+  ' sudo hciconfig hci0 iscan'      "switch hci0 to be scaned by others
+  free match|'sudo hciconfig hci0 pscan'        "
+  free match|'sudo hciconfig hci0 noencrypt'    "switch to no encrypt
+  free match|'sudo hciconfig hci0 noauth'   "switch to no authority
+  ' hcitool scan'
+  ' hcitool name 18:DC:56:D2:1C:1A '      " echo linked device name
+  ' sudo hcitool info 18:DC:56:D2:1C:1A '     "echo linked device info
+  ' sudo hciconfig hci0 lm '    " echo hci0 mode (master or slave)
+  ' sudo hciconfig hci0 lm master '   " modify hci0 mode become master
+  ' sudo rfcomm connect hci0 18:DC:56:D2:1C:1A '    "connect remote device
+  ' sudo hcitool con '    "echo status of link
+  ' sudo l2ping -c 3 18:dc:56:d2:1c:1a'       " ping other linking device 3 times
+
+
+"=== minicom
+  base command:'sudo minicom -s' back menu use 'save setup as dfl'to save as default.
+  'sudo minicom' base operate:'ctrl+a' come into setup and press 'z' enter setupmenu:
+  's':send out to. 'w':auto scroll. 'c':clean echo. 'b':history echo. 'x':esc.
+  in processing... 'ctrl+a' then 'o' configure 
+
+"=== samba 'share for win7'
+  install 'samba' and 'sambaclient'
+  'vim /etc/samba/smb.conf'
+    [debian]
+      comment=share
+      available=yes
+      path=/home/liujinjing/download
+      valid users=win
+      public=yes
+      browseable=yes
+      writeable=yes
+      create mask=0700
+      directory mask=0700
+  in the windows7,use 'map network driver'.just input'\\192.168.1.3\debian\' .username=win;password=1234.
+  done. 
+  bigbug is '...\debian' is [debian] in file'smb.conf'.they are  murder me lots of lifetime.      
+
+"=== './bak'  use shell language, var all use (`),not (')
+for file in $@;do
+  now=`date +%y-%m-%d-%H:%M:%S`
+  newfile=`basename $file`
+  cp $file ~/download/alldoc/$newfile.$now
+  cp $file /media/liujinjing/9696-1DE7/mydebian/$newfile.$now
+done
+
+"=== 'python -m serial.tool.list_ports -v
+"=== 'sudu pip3 install pybluez'
+  'sudo apt-get install libbluetooth-dev',
+  to install pybluez if error occur'fatal error:bluetooth/bluetooth.h:no such file or directory' then must previously install eviroment libbluetooth-dev.
+
+"=== 'trash-cli'
+    trash-list
+    trash-put
+    restore-trash
+    trash-empty
+    trash-empty days  
+    install:
+      1 $tar xvfz trash-cli-0.11.3-r315.tar.gz
+      2 $cd trash-cli-0.11.3-r315
+      3 $sudo python setup.py install
+
+
+
+
+  

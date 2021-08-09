@@ -1,0 +1,54 @@
+:r !ls		read input name of current directory,nice
+:r !cat [file]	input one file
+shift+a		cursor place left top on current line. 
+shift+i		cursor place current line right end.
+noremap a b	redefine key value
+map s <nop>   
+map S :w<CR>
+map Q :q<CR>
+map RR :source $MYVIMRC<CR> 	reload vimrc 
+ci" di" yi"	operate all word between "" ,'c' is change,'d' is delete,'y' is copy.may be more operate.
+df'c' yf'c'	operate untill find next 'character',first character is operate,'f' is find,'c' is nest same character.
+hjkl'5h,5j,5k,5l'	five times hit key in one operate.also set in vimrc.
+set cpo-=<		very importance
+plug install	just download plug.vim from github and copy to ~/.vim/autoload directory .excutive 'vi .vimrc' insert three sentence(1,call plug#begin...)(3,Plug '')(3,call plug#end()).but big error is wait,you must install 'git',and sentence 2 must begin with Plug,not plug.you know.
+split and cursor 	<leader>h;<leader>j;<leader>k;<leader>l
+set nocompatible
+filetype on
+filetype indent on
+filetype plugin on
+filetype plugin indent on
+set mouse=a
+set encoding=utf-8
+let &t_ut=''		some shell color isn't look right,use it
+set expandtab		tab use
+set tabstop=2		tab use hang distance
+set shiftwidth=2	the same up
+set softtabstop=2	the same up
+set list		show symbol <return><space>etc.
+set listchars=tab:\,trail:	the same up
+set scrolloff=5		hang
+set tw=0		hang
+set indentexpr=		hang
+set backspace=indent,eol,start	backspace back to uptail
+set foldmethod=indent	code fold
+set foldlevel=99	code fold
+let &t_SI="\<Esc>]50;CursorShape=1\x7"	some shell change cursor shape
+let &t_SR="\<Esc>]50;CursorShape=2\x7" 	some shell change cursor shape
+let &t_EI=:\<Esc>]50;CursorShape=0\x7"	some shell change cursor shape
+set laststatus=2	statusbar width
+set autochdir		set work directory
+BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$")| exe "normal! g'\"" | endif
+
+plug 'nerdtree'		dirtree
+plug 'youCompleteMe'	code complete
+plug 'ale'		error find and show
+plug 'tagbar'		show function list on the right colum	
+plug 'undotree'		show history of version 
+plug 'markdownpreview'	
+plug 'vim-table-mode'	
+plug 'Python-syntax'
+plug 'Goyo'		focus your mind
+plug 'vim-signiture'	bookmark in file
+
+ctrl+i ;ctrl+o 		switch to latest editplace rapitlly
