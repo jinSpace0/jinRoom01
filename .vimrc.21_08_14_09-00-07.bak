@@ -1,0 +1,243 @@
+"[common]
+"set nocompatible
+set mouse=a
+colorscheme murphy 
+"let &termencoding=&encoding
+"set fileencodings=utf-8,gb2312,ucs-borm,cp936,gbk,big5,lain1
+"set termencoding=utf-8
+set encoding=utf8
+set paste            "cancer hang and return
+"set paste!           "set auto hang and return
+"set formatoptions=   "cancer hand and return
+"set formatoptions=croql  "set auto hang and return
+"set nowrap   "cancer auto echo return
+"set wrap     "set auto echo return
+set fencs=GB18030,ucs-born,default,latin1,utf-8
+"set cpo-=<
+"set shell=sh
+let mapleader=" "
+map RR :source $MYVIMRC<cr>
+set number
+"set norelativenumber
+"set cursorline
+set scrolloff=5
+"map s <nop>
+"map S <nop>
+"map c <nop>
+"map <C-z> <nop>
+map SS :w!<cr>
+noremap ' ;
+
+"[other]
+set showcmd
+set laststatus=2
+filetype on
+filetype indent on
+filetype plugin on
+filetype plugin indent on
+"set wildmenu
+"map <leader>fd /\(\<\+\>\)\_s*\1
+"set spell
+noremap H 5h
+noremap J 5j
+noremap K 5k
+noremap L 5l
+"set list
+"set listchars=tab:\,trail:
+"let &t_SI="\<Esc>]50;CursorShape=1\x7"	
+"let &t_SR="\<Esc>]50;CursorShape=2\x7" 	
+"let &t_EI="\<Esc>]50;CursorShape=0\x7"	
+
+"[tab]
+set expandtab	
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
+
+"[split]
+map sl :set splitright<cr>:vsplit<cr>
+map sh :set nosplitright<cr>:vsplit<cr>
+map sk :set nosplitbelow<cr>:split<cr>
+map sj :set splitbelow<cr>:split<cr>
+map <up> :res -3<cr>
+map <down> :res +2<cr>
+map <left> :vertical resize-5<cr>
+map <right> :vertical resize+5<cr>
+map tn :tabe<cr>
+map th :-tabnext<cr>
+map tl :+tabnext<cr>
+map cv <C-w>t<C-w>H
+map ch <C-w>t<C-w>K
+noremap wl <C-w>l
+noremap wh <C-w>h
+noremap wj <C-w>j
+noremap wk <C-w>k
+
+"[search]
+set hlsearch
+"exec "nohlsearch"
+"set ignorecase
+"set smartcase
+"set incsearch
+"noremap n nzz
+"noremap N Nzz
+"noremap <leader><cr> :nohlsearch<cr>
+
+"[plug]
+call plug#begin('~/.vim/plugged')
+  Plug 'vim-airline/vim-airline'
+  Plug 'junegunn/goyo.vim'
+  Plug 'ycm-core/YouCompleteMe'
+  "Plug 'terryma/vim-multiple-cursors'
+  Plug 'mbbill/undotree/'
+"  Plug 'iamcco/markdown-preview.nvim',{'do':{ -> mkdp#util#install_sync()},'for':['markdown','vim-plug']}
+  Plug 'dense-analysis/ale'
+  Plug 'preservim/nerdtree' |
+    \ Plug 'Xuyuanp/nerdtree-git-plugin'|
+    \ Plug 'ryanoasis/vim-devicons'
+  Plug 'voldikss/vim-floaterm'
+"  Plug 'ryanoasis/vim-devicons'
+call plug#end()
+
+" ===
+" === Undotree
+" ===
+let g:undotree_DiffAutoOpen = 0
+map UU :UndotreeToggle<CR>
+
+" ===
+" === ale
+" ===
+" Check Python files with flake8 and pylint
+"let b:ale_linters = ['pylint','flake8']
+" Fix Python files with autopep8 and yapf.
+"let b:ale_fixers = ['autopep8', 'yapf']
+"let g:ale_completion_autoimport=1
+"let g:ale_completion_enabled=1
+"set omnifunc=ale#completion#omniFunc
+
+" ===
+" === NERDTree
+" ===
+nnoremap <leader>n :NERDTreeFocus<cr>
+"nnoremap <C-n> :NERDTree<cr>
+"nnoremap <C-d> :NERDTreeToggle<cr>
+"nnoremap <C-f> :NERDTreeFind<cr>
+
+" ===
+" === NERDTree
+" ===
+map tt :NERDTreeToggle<CR>
+map ; go 
+"let g:NERDTreeChDirMode=2 "change current working folder based on root
+"directory in NERDTree
+"let NERDTreeAutoDeleteBuffer=1 "Auto delete buffer with Nerdtree
+"autocmd vimenter * NERDTree
+"autocmd vimenter * if !argc()|NERDTree|endif
+"autocmd bufenter * if (winnr("$")==1 && exists("b:NERDTree") && b:NERDTree.isTabTree())|q|endif "UI setting
+"let NERDTreeQuitOnOpen=0 "Close NERDTree when files was opened
+"let NERDTreeMinimalUI=0 "Start NERDTree in minimal UI mode (No help lines)
+"let NERDTreeDirArrows=1 "Display arrows instead of ascii art in NERFTree
+"let g:NERDTreeHidden=1 "Don't show hidden files
+"let g:NERFTreeShowLineNumbers=1
+"let NERDTreeIgnore=['\.pyc$','\.swp','\.swo','\.vscode','__pycache__']
+"restore hide file hit 'Ctrl-I'
+let g:NERDTreeWinSize=25
+"let NERDTreeMapOpenExpl = ""
+"let NERDTreeShowBookmarks=0
+"let NERDTreeMapUpdir = ""
+"let NERDTreeMapUpdirKeepOpen = ""
+"let NERDTreeMapOpenSplit = ""
+"let NERDTreeOpenVSplit = ""
+"let NERDTreeMapActivateNode = ""
+"let NERDTreeMapOpenInTab = ""
+"let NERDTreeMapPreview = ""
+"let NERDTreeMapCloseDir = ""
+"let NERDTreeMapChangeRoot = ""
+  "Exit vim if nerdtree is the only window remaining in the only tab.
+autocmd BufEnter * if tabpagenr('$')==1&&winnr('$')==1&&exists('b:NERDTree')&& b:NERDTree.isTabTree()|quit|endif 
+  "Start nerdtree when vim is started without file arguments.
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc()==0 && !exists('s:std_in')|NERDTree |endif
+
+" ==
+" == NERDTree-git
+" ==
+let g:NERDTreeGitStatusIndicatorMapCustom = {
+    \ "Modified"  : "✹",
+    \ "Staged"    : "✚",
+    \ "Untracked" : "✭",
+    \ "Renamed"   : "➜",
+    \ "Unmerged"  : "═",
+    \ "Deleted"   : "✖",
+    \ "Dirty"     : "✗",
+    \ "Clean"     : "✔︎",
+    \ "Unknown"   : "?"
+    \ }
+
+"" ===
+"" === MarkdownPreview
+"" ===
+"let g:mkdp_auto_start = 0
+"let g:mkdp_auto_close = 1
+"let g:mkdp_refresh_slow = 0
+"let g:mkdp_command_for_global = 0
+"let g:mkdp_open_to_the_world = 0
+"let g:mkdp_open_ip = ''
+"let g:mkdp_browser = 'chromium'
+"let g:mkdp_echo_preview_url = 0
+"let g:mkdp_browserfunc = ''
+"let g:mkdp_preview_options = {
+    "\ 'mkit': {},
+    "\ 'katex': {},
+    "\ 'uml': {},
+    "\ 'maid': {},
+    "\ 'disable_sync_scroll': 0,
+    "\ 'sync_scroll_type': 'middle',
+    "\ 'hide_yaml_meta': 1
+    "\ }
+"let g:mkdp_markdown_css = ''
+"let g:mkdp_highlight_css = ''
+"let g:mkdp_port = ''
+"let g:mkdp_page_title = '「${name}」'
+
+
+" ===
+" === Goyo
+" ===
+map gy :Goyo<CR>
+
+"===
+"=== Airline
+"===
+"let g:airline_detect_modified=1
+"let g:airline_detect_spell=1
+"let g:airline_detect_iminsert=0
+"let g:airline_detect_spelllang=1
+"let g:airline_theme='dark'
+"let g:airline#extensions#ale#enabled = 1
+"let g:airline#extensions#battery#enabled = 1
+"let g:airline#extensions#bookmark#enabled = 1
+"let g:airline#extensions#capslock#enabled = 0
+
+
+"===
+"=== YouCompleteMe
+"===
+let g:ycm_global_ycm_extra_conf='~/.vim/plugged/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
+
+"===
+"=== Floaterm
+"===
+"noremap ff :FloatermToggle!]<cr>
+noremap <leader>m :FloatermNew --height=0.3<cr>
+"noremap fnf :FloatermNew --height=0.3 --wintype=float<cr>
+"noremap fh :FloatermPrev<cr>
+"noremap fl :FloatermNext<cr>
+"===
+"=== vim-devicons
+"=== 
+"set guifont=DroidSansMono_Nerd_Font:h11
+let g:webdevicons_enable_nerdtree=1
+set guifont=Droid\ Sans\ Mono\ Nerd\ Font\ Complete.ort:h11
+let g:webdevicons_conceal_nerdtree_brackets=1
