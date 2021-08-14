@@ -1,0 +1,46 @@
+$git config --global user.name "jinjingliu"
+$git config __global user.emal "1600606189@qq.com"
+$git config --list
+      [user]
+	      name = jinjingliu
+	      emal = 1600606189@qq.com
+        
+"=== ssh key 
+    $ssh-keygen
+    $ssh -T git@github.com 
+    ...feedback...
+      Warning: Permanently added the RSA host key for IP address '13.250.177.223' to the list of known hosts.
+      Hi jinSpace0! You've successfully authenticated, but GitHub does not provide shell access.
+"=== local push to github
+    $mkdir gitroom && cd gitroom    #create dir
+    $touch readme.md    #create files
+    $git init   #initial local repo.
+ -> $git add readme.md    #add files
+    $git rm readme.md   #delete files 
+ -> $git commit -m "first commit"   #commit 
+    $git commit -a    #auto newfresh  
+    $git remote add origin git@github.com:jinSpace0/jinRoom01.git
+    $git remote rm xxx
+ -> $git push -u origin master
+      ...feedback...
+      Username for 'https://github.com':1600606189@qq.com
+      Password for 'https://1600606189@qq.com@github.com:823464-jin
+"=== fetch github to local
+  $git clone git://github.com:xxxx/test.git   #readonly
+  $git clone git@github:xxxx/test.git   #mode ssh
+  $git clone https://github.com/xxx/test.git  #mode https
+  $git fetch git@github.com:xxx/xxx.git   #not combine
+  $git pull git@github.com:xxx/xxx.git    #combine  
+"=== branch
+" $git branch   #echo current branch 
+  $git branch new-feature   #new branch
+  $git checkout new-feature   #switch to new branch
+  $vi page_cache.inc.php
+  $git add page_cache.inc.php
+  $git commit -a -m "added initial version of page cachee"
+  $git push origin new-feature #push branch to service,not combine to root.
+"=== combine in master  
+  $git checkout master  #switch to new master
+  $git merge new-feature    #combine branch in master
+  $git branch   #echo current branch
+  $git push     #combine new code

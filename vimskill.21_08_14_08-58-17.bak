@@ -1,0 +1,21 @@
+skill 1: '.' #last modify operate
+  how to define a 'modify operate',first we define 'move','hjkl' is move, then other press key is 'modify'.include 'iao' so call 'edit' key. it is more excite tips" all during edit from press 'iao' -> back to normal" can include one '.'. that mean '.' is a micro 'macro'.
+  so skill '.' all we do is "one move one press'.'"
+skill 2: complex command. with'.'.
+  some complex command:
+    C   c$
+    s   cl
+    S   ^c
+    I   ^i
+    A   $a
+    o   A<CR>
+    O   ko
+skill 3: back for improve. with '.'.
+  's' 2step command. 1)delete cursor 'char'.  2)enter 'insert mode'.
+  ';' move to next 'f{char}'.
+skill 4: 'exe''replay''undo'
+  operate               redo          undo
+  {edit}    .            u
+  f{char}/t{char}         ;   
+
+
